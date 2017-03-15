@@ -1,0 +1,28 @@
+{
+  "name": "baccarat-engine",
+  "version": "1.0.0",
+  "description": "A baccarat engine for calculating results, roadmaps, and other baccarat related statistics.",
+  "main": "./src/index.js",
+  "scripts": {
+    "test": "mocha test/**/*.js",
+    "test:watch": "mocha test/**/*.js -w"
+  },
+  "keywords": [
+    "Javascript",
+    "Baccarat",
+    "Node.JS"
+  ],
+  "author": "Jeffrey Conradi <jeffreyconradi@gmail.com>",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jconradi/baccarat-engine"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.2.0"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4"
+  }
+}
