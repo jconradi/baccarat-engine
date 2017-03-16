@@ -18,4 +18,5 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 - ESLint and changed the src tree to comply with rules.
 - Add editorconfig.
+- Add Travis continuous integration server integration to project.
 ### Changed
