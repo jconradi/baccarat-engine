@@ -11,52 +11,52 @@ class GameResult {
 /**
  * A tie win outcome
  */
-GameResult.Tie = "tie";
+GameResult.Tie = 'tie';
 /**
  * A banker win outcome
  */
-GameResult.Banker = "banker";
+GameResult.Banker = 'banker';
 /**
  * A player win outcome
  */
-GameResult.Player = "player";
+GameResult.Player = 'player';
 
 /**
  * A player natural 8
  */
-GameResult.PlayerNatural8 = "player8";
+GameResult.PlayerNatural8 = 'player8';
 /**
  * A player natural 9
  */
-GameResult.PlayerNatural9 = "player9";
+GameResult.PlayerNatural9 = 'player9';
 /**
  * A banker natural 8
  */
-GameResult.BankerNatural8 = "banker8";
+GameResult.BankerNatural8 = 'banker8';
 /**
  * A banker natural 9
  */
-GameResult.BankerNatural9 = "banker9";
+GameResult.BankerNatural9 = 'banker9';
 /**
  * A no natural result
  */
-GameResult.NoNatural = "none";
+GameResult.NoNatural = 'none';
 
 /**
  * A player pair
  */
-GameResult.PlayerPair = "player";
+GameResult.PlayerPair = 'player';
 /**
  * A banker pair
  */
-GameResult.BankerPair = "banker";
+GameResult.BankerPair = 'banker';
 /**
  * A pair for both player and banker
  */
-GameResult.BothPair = "both";
+GameResult.BothPair = 'both';
 /**
  * A no pair result
  */
-GameResult.NoPair = "none";
+GameResult.NoPair = 'none';
 
 module.exports = GameResult;

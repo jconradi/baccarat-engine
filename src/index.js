@@ -13,5 +13,5 @@ module.exports = {
     GameResult: GameResult,
     Hand: Hand,
 
-    RoadmapGenerator: RoadmapGenerator
+    RoadmapGenerator: RoadmapGenerator,
 };

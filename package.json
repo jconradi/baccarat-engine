@@ -4,6 +4,7 @@
   "description": "A baccarat engine for calculating results, roadmaps, and other baccarat related statistics.",
   "main": "./src/index.js",
   "scripts": {
+    "lint": "eslint src/**/*.js",
     "test": "mocha test/**/*.js",
     "test:watch": "mocha test/**/*.js -w"
   },
@@ -19,7 +20,10 @@
     "url": "https://github.com/jconradi/baccarat-engine"
   },
   "devDependencies": {
+    "babel-eslint": "^7.1.1",
     "chai": "^3.5.0",
+    "eslint": "^3.17.1",
+    "eslint-config-google": "^0.7.1",
     "mocha": "^3.2.0"
   },
   "dependencies": {

@@ -16,5 +16,6 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-
+- ESLint and changed the src tree to comply with rules.
+- Add editorconfig.
 ### Changed

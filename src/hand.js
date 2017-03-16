@@ -5,7 +5,7 @@
  */
 class Hand {
     /**
-     * 
+     *
      * @param {Card[]} playerCards The players cards from the game
      * @param {Card[]} bankerCards The bankers cards from the game
      */
