@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const Hand = require('../src/Hand.js');
+const Hand = require('../src/hand.js');
 
 describe('Hand', function() {
     describe('constructor#', function() {
