@@ -5,8 +5,8 @@
   "main": "./src/index.js",
   "scripts": {
     "lint": "eslint src/**/*.js",
-    "test": "mocha test/**/*.js",
-    "test:watch": "mocha test/**/*.js -w"
+    "test": "mocha --recursive test",
+    "test:watch": "mocha --recursive test -w"
   },
   "keywords": [
     "Javascript",
