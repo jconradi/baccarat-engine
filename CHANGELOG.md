@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [1.1.1] - 2020-03-12
+### Added
+- Added BaccaratGameEngine to main module exports
+### Changed
+
 ## [1.1.0] - 2020-03-12
 ### Added
 - Baccarat game engine.  Can now simulate a game of baccarat based on proper game rules.  3rd card draw logic is considered.
