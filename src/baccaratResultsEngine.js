@@ -117,18 +117,17 @@ class BaccaratResultsEngine {
      */
     calculateHandValue(cards = []) {
         let cardsValue = cards.reduce((handValue, card) => {
-            return this.valueForCard(card) + handValue;
+            return BaccaratResultsEngine.valueForCard(card) + handValue;
         }, 0);
 
         return cardsValue % 10;
     }
 
     /**
-     * @private
      * @param {Card} card The card to calculate a baccarat hand value for
      * @return {Number} The baccarat hand value
      */
-    valueForCard({suit, value = 0}) {
+    static valueForCard({suit, value = 0}) {
         switch (value) {
             case 'A': return 1;
             case '2': return 2;

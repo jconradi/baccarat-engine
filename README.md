@@ -36,6 +36,21 @@ The croupier will deal the cards according to the tableau and the croupier will 
 
 Should both Banker and Player have the same value at the end of the deal the croupier shall announce "égalité — tie bets win." All tie bets will be paid at 8-to-1 odds and all bets on Player or Banker remain in place and active for the next game (the customer may or may not be able to retract these bets depending on casino rules).
 
+## Cut Cards & Burning Cards
+Cut cards are part of the shoe implementation.  Currently set to 16 cards before the end of the shoe, the Baccarat Game Engine will show when a burn is required.
+
+```javascript
+// Create game engine (8 decks default)
+gameEngine = new BaccaratGameEngine();
+gameEngine.shoe.createDecks();
+gameEngine.shoe.shuffle();
+
+if (gameEngine.isBurnNeeded) {
+  // Burn card is the first card drawn that determined the burn cards to use.
+  var burnCard = gameEngine.burnCards();
+}
+```
+
 ## Usage
 
 Coming soon!

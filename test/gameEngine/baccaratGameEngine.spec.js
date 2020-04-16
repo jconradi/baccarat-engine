@@ -11,6 +11,25 @@ describe('BaccaratGameEngine', function() {
     beforeEach(function() {
         gameEngine = new BaccaratGameEngine();
         resultsEngine = new BaccaratResultsEngine();
+        gameEngine.shoe.createDecks();
+        gameEngine.shoe.shuffle();
+    });
+
+    describe('BurnOperations', function() {
+        describe("When played down to end of deck", function() {
+            it ("Should notify that burn card has been reached", function() {
+
+                while (gameEngine.shoe.cardsLeft >= 16) {
+                    gameEngine.dealGame();
+                }
+
+                expect(gameEngine.isBurnNeeded).equal(true);
+            });
+
+            it ("Should not require burn before dealing", function() {
+                expect(gameEngine.isBurnNeeded).equal(false);
+            });
+        });
     });
 
 

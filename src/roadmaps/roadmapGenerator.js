@@ -135,6 +135,104 @@ class RoadmapGenerator {
         return returnList;
     }
 
+    bigRoadColumnDefinitions(bigRoad) {
+        var columnDictionary = {};
+
+        bigRoad.forEach(item => {
+            if (!_.has(columnDictionary, item.logicalColumn)) {
+                columnDictionary[item.logicalColumn] = {
+                    logicalColumn: item.logicalColumn,
+                    logicalColumnDepth: 1,
+                    outcome: item.result.outcome
+                };
+            }
+            else {
+                columnDictionary[item.logicalColumn].logicalColumnDepth++;
+            }
+        });
+
+        return columnDictionary;
+    }
+
+    derivedRoad(bigRoad, cycleLength) {
+        var columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
+
+        /*
+            1.    Let k be the Cycle of the roadmap.  k = 1 for big eye road.
+            2.    Assume that the last icon added to the 大路 (Big Road) is on row m of column n.
+            2.a.    If m >= 2, we compare with column (n-k).
+            2.a.1.    If there is no such column (i.e. before the 1st column) …  No need to add any icon.
+            2.a.2.    If there is such a column, and the column has p icons.
+            2.a.2.1.    If m <= p  …  The answer is red.
+            2.a.2.2.    If m = p + 1  …  The answer is blue.
+            2.a.2.3.    If m > p + 1  … The answer is red.
+            2.b.    If m = 1, reverse the result (Banker to Player, and vice versa), determine the result as in rule 2.a above, and reverse the answer (Red to blue, and vice versa) to get the real answer.
+        */
+
+        var k = cycleLength;
+        var outcomes = [];
+
+        columnDefinitions.forEach(bigRoadColumn => {
+            var outcome = "blue";
+            var n = bigRoadColumn.logicalColumn;
+
+            for (let m = 0; m < bigRoadColumn.logicalColumnDepth; m++) {
+                var rowMDepth = m + 1;
+
+                if (rowMDepth >= 2) {
+                    var compareColumn = n - k;
+
+                    // Step 2.a.1 - No column exists here.
+                    if (compareColumn <= 0)
+                        continue;
+
+                    // Step 2.a.1
+                    var pColumn = columnDefinitions[compareColumn];
+                    if (!pColumn)
+                        continue;
+
+                    var p = pColumn.logicalColumnDepth;
+                    if (rowMDepth <= p) {
+                        outcome = "red";
+                    }
+                    else if (rowMDepth == (p + 1)) {
+                        outcome = "blue";
+                    }
+                    else if (rowMDepth > (p + 1)) {
+                        outcome = "red";
+                    }
+
+                    outcomes.Add(outcome);
+
+                }
+                else {
+                    var kDistanceColumn = n - (k + 1);
+                    var leftColumn = n - 1;
+
+                    var kDistanceColumnDefinition = columnDefinitions[kDistanceColumn];
+                    var leftColumnDefinition = cColumnDefinitions[leftColumn];
+
+                    if (kDistanceColumnDefinition != null &&
+                        leftColumnDefinition != null) {
+                        if (kDistanceColumnDefinition.logicalColumnDepth == leftColumnDefinition.logicalColumnDepth)
+                            outcome = "red";
+                        else
+                            outcome = "blue";
+
+                        outcomes.Add(outcome);
+                    }
+                }
+            }
+        });
+
+        return outcomes;
+
+    }
+
+    bigEyeRoad(bigRoad) {
+        return this.derivedRoad(bigRoad, 1);
+    }
+
     /**
      * Scrolls the big road drawing to only show the specified amount of
      * drawing columns.

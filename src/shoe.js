@@ -1,17 +1,31 @@
 'use strict';
 
 const Card = require ('./card.js');
-const EventEmitter = require('events');
+const BaccaratResultsEngine = require("./baccaratResultsEngine.js");
 
+const EventEmitter = require('events');
+const Shuffle = require('shuffle-array');
+
+const CutCardLengthFromBottom  = 16;
 
 class Shoe extends EventEmitter {
+    get cardsLeft() {
+        return this.cards.length;
+    }
+    
+    get cardsBeforeCutCard() {
+        return Math.max(0, this.cardsLeft - CutCardLengthFromBottom);
+    }
+
+    get cutCardReached() {
+        return this.cardsBeforeCutCard <= 0;
+    }
+
     constructor(decks) {
         super();
 
         this.decks = decks;
         this.cards = [];
-
-        this.createDecks();
     }
 
     createDecks() {
@@ -23,10 +37,7 @@ class Shoe extends EventEmitter {
     }
 
     shuffle() {
-        for (let i = this.cards.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [this.cards[i], this.cards[j]] = [this.cards[j], this.cards[i]];
-        }
+        Shuffle(this.cards);
     }
 
     draw() {

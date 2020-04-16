@@ -8,9 +8,36 @@ const Shoe = require('../shoe.js');
  * Plays a baccarat game accoring to Punto Banco rules
  */
 class BaccaratGameEngine {
+    /**
+     * Can another game be played without creating another deck.
+     */
+    get isBurnNeeded() {
+        return this.shoe.cutCardReached;
+    }
+
     constructor() {
         this.resultsEngine = new BaccaratResultsEngine();
         this.shoe = new Shoe(8);
+    }
+
+
+    /**
+     * Performs a burn operation
+     */
+    burnCards() {
+        var burnCard = this.shoe.draw();
+
+        var burnCardValue = BaccaratResultsEngine.valueForCard(burnCard);
+
+        // Face cards & T count for 10 during burn
+        if (burnCardValue == 0)
+            burnCardValue = 10;
+
+        for (var i = 0; i < burnCardValue; i++) {
+            this.shoe.draw();
+        }
+
+        return burnCard;
     }
     
     dealGame() {
@@ -44,7 +71,7 @@ class BaccaratGameEngine {
         else  {
             var player3rdCard = this.shoe.draw();
             hand.playerCards.push(player3rdCard);
-            var player3rdCardValue = this.resultsEngine.valueForCard(player3rdCard);
+            var player3rdCardValue =  BaccaratResultsEngine.valueForCard(player3rdCard);
             playerCardsValue = this.resultsEngine.calculateHandValue(hand.playerCards);
 
             if (bankerCardsValue <= 2) {
