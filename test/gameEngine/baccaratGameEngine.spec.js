@@ -32,6 +32,19 @@ describe('BaccaratGameEngine', function() {
         });
     });
 
+    describe("burnCards#", function() {
+        describe("When cards are burned", function() {
+            it("Should return the same amount of burn cards as the burn card.", function() {
+                var burn = gameEngine.burnCards();
+                var burnCardValue = BaccaratResultsEngine.valueForCard(burn.burnCard);
+
+                var expectedCards = burnCardValue == 0 ? 10 : burnCardValue;
+
+                expect(expectedCards).equal(burn.burnCards.length);
+            })
+        })
+    })
+
 
     describe('dealGame#', function() {
         describe("When 100,000 games simulated", function() {
