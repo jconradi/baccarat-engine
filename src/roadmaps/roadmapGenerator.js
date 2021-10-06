@@ -9,6 +9,13 @@ const GameResult = require('../gameResult.js');
  */
 class RoadmapGenerator {
 
+  /**
+  * RoadmapGenerator
+  * @constructor
+  */
+  constructor() {
+  }
+
     /**
      * Calculates a bead plate based on games played.
      * @param {GameResult[]} gameResults The game results to
