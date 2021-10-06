@@ -136,26 +136,26 @@ class RoadmapGenerator {
     }
 
     bigRoadColumnDefinitions(bigRoad) {
-        var columnDictionary = {};
+        let columnDictionary = {};
 
-        bigRoad.forEach(item => {
+        bigRoad.forEach((item) => {
             if (!_.has(columnDictionary, item.logicalColumn)) {
                 columnDictionary[item.logicalColumn] = {
                     logicalColumn: item.logicalColumn,
                     logicalColumnDepth: 1,
-                    outcome: item.result.outcome
+                    outcome: item.result.outcome,
                 };
-            }
-            else {
+            } else {
                 columnDictionary[item.logicalColumn].logicalColumnDepth++;
             }
         });
 
+        // console.log('columnDictionary = ', JSON.stringify(columnDictionary));
         return columnDictionary;
     }
 
     derivedRoad(bigRoad, cycleLength) {
-        var columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
+        let columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
 
         /*
             1.    Let k be the Cycle of the roadmap.  k = 1 for big eye road.
@@ -169,64 +169,59 @@ class RoadmapGenerator {
             2.b.    If m = 1, reverse the result (Banker to Player, and vice versa), determine the result as in rule 2.a above, and reverse the answer (Red to blue, and vice versa) to get the real answer.
         */
 
-        var k = cycleLength;
-        var outcomes = [];
+        let k = cycleLength;
+        let outcomes = [];
 
-        columnDefinitions.forEach(bigRoadColumn => {
-            var outcome = "blue";
-            var n = bigRoadColumn.logicalColumn;
+        Object.values(columnDefinitions).forEach((bigRoadColumn) => {
+            let outcome = 'blue';
+            let n = bigRoadColumn.logicalColumn;
 
             for (let m = 0; m < bigRoadColumn.logicalColumnDepth; m++) {
-                var rowMDepth = m + 1;
+                let rowMDepth = m + 1;
 
                 if (rowMDepth >= 2) {
-                    var compareColumn = n - k;
+                    let compareColumn = n - k;
 
                     // Step 2.a.1 - No column exists here.
                     if (compareColumn <= 0)
                         continue;
 
                     // Step 2.a.1
-                    var pColumn = columnDefinitions[compareColumn];
+                    let pColumn = columnDefinitions[compareColumn];
                     if (!pColumn)
                         continue;
 
-                    var p = pColumn.logicalColumnDepth;
+                    let p = pColumn.logicalColumnDepth;
                     if (rowMDepth <= p) {
-                        outcome = "red";
-                    }
-                    else if (rowMDepth == (p + 1)) {
-                        outcome = "blue";
-                    }
-                    else if (rowMDepth > (p + 1)) {
-                        outcome = "red";
+                        outcome = 'red';
+                    } else if (rowMDepth == (p + 1)) {
+                        outcome = 'blue';
+                    } else if (rowMDepth > (p + 1)) {
+                        outcome = 'red';
                     }
 
-                    outcomes.Add(outcome);
+                    outcomes.push(outcome);
+                } else {
+                    let kDistanceColumn = n - (k + 1);
+                    let leftColumn = n - 1;
 
-                }
-                else {
-                    var kDistanceColumn = n - (k + 1);
-                    var leftColumn = n - 1;
-
-                    var kDistanceColumnDefinition = columnDefinitions[kDistanceColumn];
-                    var leftColumnDefinition = cColumnDefinitions[leftColumn];
+                    let kDistanceColumnDefinition = columnDefinitions[kDistanceColumn];
+                    let leftColumnDefinition = columnDefinitions[leftColumn];
 
                     if (kDistanceColumnDefinition != null &&
                         leftColumnDefinition != null) {
                         if (kDistanceColumnDefinition.logicalColumnDepth == leftColumnDefinition.logicalColumnDepth)
-                            outcome = "red";
+                            outcome = 'red';
                         else
-                            outcome = "blue";
+                            outcome = 'blue';
 
-                        outcomes.Add(outcome);
+                        outcomes.push(outcome);
                     }
                 }
             }
         });
 
         return outcomes;
-
     }
 
     bigEyeRoad(bigRoad) {
