@@ -1,5 +1,4 @@
-Internet Systems Consortium license
-===================================
+# Internet Systems Consortium license
 
 Copyright (c) `<2017>`, `<Jeffrey Conradi>`
 

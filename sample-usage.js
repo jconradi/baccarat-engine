@@ -1,8 +1,9 @@
+/* eslint-disable max-len */
+/* eslint-disable no-console */
 const RoadmapGenerator = require('./src/roadmaps/roadmapGenerator');
 const BaccaratGameEngine = require('./src/gameEngine/baccaratGameEngine');
 
 const roadmapGenerator = new RoadmapGenerator();
-
 
 // Create game engine (8 decks default)
 const gameEngine = new BaccaratGameEngine();
@@ -28,8 +29,10 @@ for (let i = 0; i < 100; i += 1) {
 
   gameResults.push(result);
 
-
-  const beadPlate = roadmapGenerator.beadPlate(gameResults, {columns: 20, rows: 6} );
+  const beadPlate = roadmapGenerator.beadPlate(gameResults, {
+    columns: 20,
+    rows: 6,
+  });
   const bigRoad = roadmapGenerator.bigRoad(gameResults);
   console.log('beadPlate = ', JSON.stringify(beadPlate));
   console.log('bigRoad = ', JSON.stringify(bigRoad));
@@ -38,4 +41,4 @@ for (let i = 0; i < 100; i += 1) {
   console.log('bigEye = ', JSON.stringify(bigEye));
 }
 
-  console.log('gameResults = ', JSON.stringify(gameResults));
+console.log('gameResults = ', JSON.stringify(gameResults));
