@@ -41,7 +41,7 @@ declare class RoadmapGenerator {
    * @return {BigRoad} A data representation of how a big road can
    *  be drawn from this calculation.
    */
-  bigRoad(gameResults?: GameResult[], config: BigRoadConfig): BigRoad;
+  bigRoad(gameResults: GameResult[], config: BigRoadConfig): BigRoad;
 
   /**
    * Big road column definitions
@@ -108,4 +108,4 @@ declare class RoadmapGenerator {
    */
   private rowForGameNumber(gameNumber: number, columnSize: number): number;
 }
-import GameResult = require("../../src/gameResult.js");
+import GameResult = require("../gameResult");

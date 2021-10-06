@@ -18,7 +18,7 @@ declare class BaccaratGameEngine {
   };
   dealGame(): Hand;
 }
-import BaccaratResultsEngine = require("../../src/baccaratResultsEngine.js");
-import Shoe = require("../../src/shoe.js");
-import Hand = require("../../src/hand.js");
-import Card = require("../../src/card.js");
+import BaccaratResultsEngine = require("../baccaratResultsEngine.js");
+import Shoe = require("../shoe.js");
+import Hand = require("../hand.js");
+import Card = require("../card.js");
