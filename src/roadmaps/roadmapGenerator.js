@@ -256,9 +256,9 @@ class RoadmapGenerator {
      * drawing columns.
      * @private
      * @param {Object[]} results The big road data
-     * @param {Number} highestDrawingColumn The highest column reached in
+     * @param {number} highestDrawingColumn The highest column reached in
      * the big road supplied.
-     * @param {Number} drawingColumns The amount of columns to show in the
+     * @param {number} drawingColumns The amount of columns to show in the
      * big road
      * @return {Object[]} A new list of big road items whose view is scrolled
      * to have the amount of drawing columns visible.
@@ -279,9 +279,9 @@ class RoadmapGenerator {
      * Generates the column number for the game number of a game based
      * on the column size of the table to be drawn.
      * @private
-     * @param {Number} gameNumber The game number of the item in the sequence.
-     * @param {Number} columnSize The column size of the drawn table
-     * @return {Number} The column number that this gameNumber is drawn to.
+     * @param {number} gameNumber The game number of the item in the sequence.
+     * @param {number} columnSize The column size of the drawn table
+     * @return {number} The column number that this gameNumber is drawn to.
      */
     columnForGameNumber(gameNumber, columnSize) {
         return Math.floor(gameNumber / columnSize);
@@ -291,9 +291,9 @@ class RoadmapGenerator {
      * Generates the row number for the game number of a game based
      * on the column size of the table to be drawn.
      * @private
-     * @param {Number} gameNumber The game number of the item in the sequence.
-     * @param {Number} columnSize The column size of the drawn table
-     * @return {Number} The row number that this gameNumber is drawn to.
+     * @param {number} gameNumber The game number of the item in the sequence.
+     * @param {number} columnSize The column size of the drawn table
+     * @return {number} The row number that this gameNumber is drawn to.
      */
     rowForGameNumber(gameNumber, columnSize) {
         return gameNumber % columnSize;

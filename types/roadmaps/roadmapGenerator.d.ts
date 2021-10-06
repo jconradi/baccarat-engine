@@ -13,7 +13,11 @@ interface BigRoadConfig {
   scroll: boolean;
 }
 
+interface ColumnDictionary {}
+
 interface BigRoad {}
+
+interface BigEyeRoad {}
 
 /**
  * Generator for common baccarat roadmaps.
@@ -33,21 +37,30 @@ declare class RoadmapGenerator {
    * Calculates a big road based on games played.
    * @param {GameResult[]} gameResults The game results to calculate the
    *  roadmap from.
-   * @param {Object} config The configuration object for drawing options.
-   * @return {Object} A data representation of how a big road can
+   * @param {BigRoadConfig} config The configuration object for drawing options.
+   * @return {BigRoad} A data representation of how a big road can
    *  be drawn from this calculation.
    */
-  bigRoad(gameResults?: GameResult[], { columns, rows, scroll }?: any): any;
-  bigRoadColumnDefinitions(bigRoad: any): {};
+  bigRoad(gameResults?: GameResult[], config: BigRoadConfig): BigRoad;
+
+  /**
+   * Big road column definitions
+   * @private
+   * @param {BigRoad} bigRoad The big road data
+   * @return {ColumnDictionary} Map of columns
+   */
+  bigRoadColumnDefinitions(bigRoad: BigRoad): ColumnDictionary;
+
   /**
    * Derived road using the given cycle
    * @private
    * @param {BigRoad} bigRoad The big road data
-   * @param {int} cycleLength The big road data
+   * @param {number} cycleLength The big road data
    * @return {BigEyeRoad} A new list of big road items whose view is scrolled
    * to have the amount of drawing columns visible.
    */
-  private derivedRoad;
+  private derivedRoad(bigRoad: BigRoad, cycleLength: number): BigEyeRoad;
+
   /**
    * Scrolls the big eye road - derived road with a cycle of 1
    * @public
@@ -55,37 +68,44 @@ declare class RoadmapGenerator {
    * @return {BigEyeRoad} A new list of big road items whose view is scrolled
    * to have the amount of drawing columns visible.
    */
-  public bigEyeRoad(bigRoad: any): any;
+  public bigEyeRoad(bigRoad: BigRoad): BigEyeRoad;
+
   /**
    * Scrolls the big road drawing to only show the specified amount of
    * drawing columns.
    * @private
-   * @param {Object[]} results The big road data
-   * @param {Number} highestDrawingColumn The highest column reached in
+   * @param {BigRoad} results The big road data
+   * @param {number} highestDrawingColumn The highest column reached in
    * the big road supplied.
-   * @param {Number} drawingColumns The amount of columns to show in the
+   * @param {number} drawingColumns The amount of columns to show in the
    * big road
-   * @return {Object[]} A new list of big road items whose view is scrolled
+   * @return {BigRoad} A new list of big road items whose view is scrolled
    * to have the amount of drawing columns visible.
    */
-  private scrollBigRoad;
+  private scrollBigRoad(
+    results: BigRoad,
+    highestDrawingColumn: number,
+    drawingColumns: number
+  ): BigRoad;
+
   /**
    * Generates the column number for the game number of a game based
    * on the column size of the table to be drawn.
    * @private
-   * @param {Number} gameNumber The game number of the item in the sequence.
-   * @param {Number} columnSize The column size of the drawn table
-   * @return {Number} The column number that this gameNumber is drawn to.
+   * @param {number} gameNumber The game number of the item in the sequence.
+   * @param {number} columnSize The column size of the drawn table
+   * @return {number} The column number that this gameNumber is drawn to.
    */
-  private columnForGameNumber;
+  private columnForGameNumber(gameNumber: number, columnSize: number): number;
+
   /**
    * Generates the row number for the game number of a game based
    * on the column size of the table to be drawn.
    * @private
-   * @param {Number} gameNumber The game number of the item in the sequence.
-   * @param {Number} columnSize The column size of the drawn table
-   * @return {Number} The row number that this gameNumber is drawn to.
+   * @param {number} gameNumber The game number of the item in the sequence.
+   * @param {number} columnSize The column size of the drawn table
+   * @return {number} The row number that this gameNumber is drawn to.
    */
-  private rowForGameNumber;
+  private rowForGameNumber(gameNumber: number, columnSize: number): number;
 }
-import GameResult = require("../gameResult.js");
+import GameResult = require("../../src/gameResult.js");

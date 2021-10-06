@@ -49,6 +49,6 @@ declare class BaccaratResultsEngine {
    */
   calculateHandValue(cards: Card[]): number;
 }
-import GameResult = require("./gameResult.js");
-import Hand = require("./hand.js");
-import Card = require("./card.js");
+import GameResult = require("../src/gameResult.js");
+import Hand = require("../src/hand.js");
+import Card = require("../src/card.js");
