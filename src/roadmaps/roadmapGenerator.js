@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict';
 
 const _ = require('lodash');
@@ -12,8 +13,8 @@ class RoadmapGenerator {
      * Calculates a bead plate based on games played.
      * @param {GameResult[]} gameResults The game results to
      *  calculate the roadmap from.
-     * @param {Object} config The configuration object for drawing options.
-     * @return {Object} A data representation of how a bead plate can
+     * @param {BeadPlateConfig} config The configuration object for drawing options.
+     * @return {BeadPlate} A data representation of how a bead plate can
      *  be drawn from this calculation.
      */
     beadPlate(gameResults = [], {columns = 6, rows = 6}) {
@@ -55,7 +56,7 @@ class RoadmapGenerator {
                 tieStack.push(gameResult);
             } else {
                 if (lastItem) {
-                    // Add the ties that happened inbetween the last placed
+                    // Add the ties that happened in between the last placed
                     // big road item  and this new big road item to the
                     // last entered big road item.
                     let lastItemInResults = _.last(returnList);
@@ -135,6 +136,12 @@ class RoadmapGenerator {
         return returnList;
     }
 
+    /**
+     * Big road column definitions
+     * @private
+     * @param {BigRoad} bigRoad The big road data
+     * @return {ColumnDictionary} Map of columns
+     */
     bigRoadColumnDefinitions(bigRoad) {
         let columnDictionary = {};
 
@@ -154,6 +161,15 @@ class RoadmapGenerator {
         return columnDictionary;
     }
 
+
+    /**
+     * Derived road using the given cycle
+     * @private
+     * @param {BigRoad} bigRoad The big road data
+     * @param {int} cycleLength The big road data
+     * @return {BigEyeRoad} A new list of big road items whose view is scrolled
+     * to have the amount of drawing columns visible.
+     */
     derivedRoad(bigRoad, cycleLength) {
         let columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
 
@@ -224,6 +240,13 @@ class RoadmapGenerator {
         return outcomes;
     }
 
+    /**
+     * Scrolls the big eye road - derived road with a cycle of 1
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {BigEyeRoad} A new list of big road items whose view is scrolled
+     * to have the amount of drawing columns visible.
+     */
     bigEyeRoad(bigRoad) {
         return this.derivedRoad(bigRoad, 1);
     }

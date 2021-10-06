@@ -13,6 +13,7 @@
     "Baccarat",
     "Node.JS"
   ],
+  "types": "types/index.d.ts",
   "author": "Jeffrey Conradi <jeffreyconradi@gmail.com>",
   "license": "ISC",
   "repository": {
