@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 'use strict';
 
 const _ = require('lodash');
@@ -8,12 +9,19 @@ const GameResult = require('../gameResult.js');
  */
 class RoadmapGenerator {
 
+  /**
+  * RoadmapGenerator
+  * @constructor
+  */
+  constructor() {
+  }
+
     /**
      * Calculates a bead plate based on games played.
      * @param {GameResult[]} gameResults The game results to
      *  calculate the roadmap from.
-     * @param {Object} config The configuration object for drawing options.
-     * @return {Object} A data representation of how a bead plate can
+     * @param {BeadPlateConfig} config The configuration object for drawing options.
+     * @return {BeadPlate} A data representation of how a bead plate can
      *  be drawn from this calculation.
      */
     beadPlate(gameResults = [], {columns = 6, rows = 6}) {
@@ -55,7 +63,7 @@ class RoadmapGenerator {
                 tieStack.push(gameResult);
             } else {
                 if (lastItem) {
-                    // Add the ties that happened inbetween the last placed
+                    // Add the ties that happened in between the last placed
                     // big road item  and this new big road item to the
                     // last entered big road item.
                     let lastItemInResults = _.last(returnList);
@@ -135,27 +143,41 @@ class RoadmapGenerator {
         return returnList;
     }
 
+    /**
+     * Big road column definitions
+     * @private
+     * @param {BigRoad} bigRoad The big road data
+     * @return {ColumnDictionary} Map of columns
+     */
     bigRoadColumnDefinitions(bigRoad) {
-        var columnDictionary = {};
+        let columnDictionary = {};
 
-        bigRoad.forEach(item => {
+        bigRoad.forEach((item) => {
             if (!_.has(columnDictionary, item.logicalColumn)) {
                 columnDictionary[item.logicalColumn] = {
                     logicalColumn: item.logicalColumn,
                     logicalColumnDepth: 1,
-                    outcome: item.result.outcome
+                    outcome: item.result.outcome,
                 };
-            }
-            else {
+            } else {
                 columnDictionary[item.logicalColumn].logicalColumnDepth++;
             }
         });
 
+        // console.log('columnDictionary = ', JSON.stringify(columnDictionary));
         return columnDictionary;
     }
 
+
+    /**
+     * Derived road using the given cycle
+     * @private
+     * @param {BigRoad} bigRoad The big road data
+     * @param {int} cycleLength Cycle used to calculate the derived road
+     * @return {DerivedRoad} A new list of derived road items (i.e., list of red/blue)
+     */
     derivedRoad(bigRoad, cycleLength) {
-        var columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
+        let columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
 
         /*
             1.    Let k be the Cycle of the roadmap.  k = 1 for big eye road.
@@ -169,80 +191,100 @@ class RoadmapGenerator {
             2.b.    If m = 1, reverse the result (Banker to Player, and vice versa), determine the result as in rule 2.a above, and reverse the answer (Red to blue, and vice versa) to get the real answer.
         */
 
-        var k = cycleLength;
-        var outcomes = [];
+        let k = cycleLength;
+        let outcomes = [];
 
-        columnDefinitions.forEach(bigRoadColumn => {
-            var outcome = "blue";
-            var n = bigRoadColumn.logicalColumn;
+        Object.values(columnDefinitions).forEach((bigRoadColumn) => {
+            let outcome = 'blue';
+            let n = bigRoadColumn.logicalColumn;
 
             for (let m = 0; m < bigRoadColumn.logicalColumnDepth; m++) {
-                var rowMDepth = m + 1;
+                let rowMDepth = m + 1;
 
                 if (rowMDepth >= 2) {
-                    var compareColumn = n - k;
+                    let compareColumn = n - k;
 
                     // Step 2.a.1 - No column exists here.
                     if (compareColumn <= 0)
                         continue;
 
                     // Step 2.a.1
-                    var pColumn = columnDefinitions[compareColumn];
+                    let pColumn = columnDefinitions[compareColumn];
                     if (!pColumn)
                         continue;
 
-                    var p = pColumn.logicalColumnDepth;
+                    let p = pColumn.logicalColumnDepth;
                     if (rowMDepth <= p) {
-                        outcome = "red";
-                    }
-                    else if (rowMDepth == (p + 1)) {
-                        outcome = "blue";
-                    }
-                    else if (rowMDepth > (p + 1)) {
-                        outcome = "red";
+                        outcome = 'red';
+                    } else if (rowMDepth == (p + 1)) {
+                        outcome = 'blue';
+                    } else if (rowMDepth > (p + 1)) {
+                        outcome = 'red';
                     }
 
-                    outcomes.Add(outcome);
+                    outcomes.push(outcome);
+                } else {
+                    let kDistanceColumn = n - (k + 1);
+                    let leftColumn = n - 1;
 
-                }
-                else {
-                    var kDistanceColumn = n - (k + 1);
-                    var leftColumn = n - 1;
-
-                    var kDistanceColumnDefinition = columnDefinitions[kDistanceColumn];
-                    var leftColumnDefinition = cColumnDefinitions[leftColumn];
+                    let kDistanceColumnDefinition = columnDefinitions[kDistanceColumn];
+                    let leftColumnDefinition = columnDefinitions[leftColumn];
 
                     if (kDistanceColumnDefinition != null &&
                         leftColumnDefinition != null) {
                         if (kDistanceColumnDefinition.logicalColumnDepth == leftColumnDefinition.logicalColumnDepth)
-                            outcome = "red";
+                            outcome = 'red';
                         else
-                            outcome = "blue";
+                            outcome = 'blue';
 
-                        outcomes.Add(outcome);
+                        outcomes.push(outcome);
                     }
                 }
             }
         });
 
         return outcomes;
-
     }
 
+    /**
+     * Generates the big eye road - derived road with a cycle of 1
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {BigEyeRoad} A new list of derived road items
+     */
     bigEyeRoad(bigRoad) {
         return this.derivedRoad(bigRoad, 1);
+    }
+
+    /**
+     * Generates the small road - derived road with a cycle of 2
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {SmallRoad} A new list of derived road items
+     */
+    smallRoad(bigRoad) {
+        return this.derivedRoad(bigRoad, 2);
+    }
+    /**
+     * Generates the cockroach pig - derived road with a cycle of 3
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {CockroachPigRoad} A new list of derived road items
+     */
+    cockroachPig(bigRoad) {
+        return this.derivedRoad(bigRoad, 3);
     }
 
     /**
      * Scrolls the big road drawing to only show the specified amount of
      * drawing columns.
      * @private
-     * @param {Object[]} results The big road data
-     * @param {Number} highestDrawingColumn The highest column reached in
+     * @param {GameResult[]} results The big road data
+     * @param {number} highestDrawingColumn The highest column reached in
      * the big road supplied.
-     * @param {Number} drawingColumns The amount of columns to show in the
+     * @param {number} drawingColumns The amount of columns to show in the
      * big road
-     * @return {Object[]} A new list of big road items whose view is scrolled
+     * @return {BigRoad} A new list of big road items whose view is scrolled
      * to have the amount of drawing columns visible.
      */
     scrollBigRoad(results = [], highestDrawingColumn, drawingColumns) {
@@ -261,9 +303,9 @@ class RoadmapGenerator {
      * Generates the column number for the game number of a game based
      * on the column size of the table to be drawn.
      * @private
-     * @param {Number} gameNumber The game number of the item in the sequence.
-     * @param {Number} columnSize The column size of the drawn table
-     * @return {Number} The column number that this gameNumber is drawn to.
+     * @param {number} gameNumber The game number of the item in the sequence.
+     * @param {number} columnSize The column size of the drawn table
+     * @return {number} The column number that this gameNumber is drawn to.
      */
     columnForGameNumber(gameNumber, columnSize) {
         return Math.floor(gameNumber / columnSize);
@@ -273,9 +315,9 @@ class RoadmapGenerator {
      * Generates the row number for the game number of a game based
      * on the column size of the table to be drawn.
      * @private
-     * @param {Number} gameNumber The game number of the item in the sequence.
-     * @param {Number} columnSize The column size of the drawn table
-     * @return {Number} The row number that this gameNumber is drawn to.
+     * @param {number} gameNumber The game number of the item in the sequence.
+     * @param {number} columnSize The column size of the drawn table
+     * @return {number} The row number that this gameNumber is drawn to.
      */
     rowForGameNumber(gameNumber, columnSize) {
         return gameNumber % columnSize;

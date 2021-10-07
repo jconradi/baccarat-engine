@@ -1,26 +1,46 @@
 'use strict';
 
-const Card = require ('./card.js');
-const BaccaratResultsEngine = require("./baccaratResultsEngine.js");
+const Card = require('./card.js');
 
 const EventEmitter = require('events');
-const Shuffle = require('shuffle-array');
+const shuffleArray = require('shuffle-array');
 
-const CutCardLengthFromBottom  = 16;
+const CutCardLengthFromBottom = 16;
 
+/**
+ * Baccarat shoe
+ */
 class Shoe extends EventEmitter {
+
+    /**
+     * Cards left
+     * @return {number} Count of cards left
+     */
     get cardsLeft() {
         return this.cards.length;
     }
-    
+
+    /**
+     * Number of cards before the cut card
+     * @return {number} Count of cards left before cut card
+     */
     get cardsBeforeCutCard() {
         return Math.max(0, this.cardsLeft - CutCardLengthFromBottom);
     }
 
+    /**
+     * Has the cut card been reached
+     * @return {boolean} true if the cut card has been reached, false otherwise
+     */
     get cutCardReached() {
         return this.cardsBeforeCutCard <= 0;
     }
 
+    /**
+     * Shoe constructor
+     * @param {number} decks - Count of decks to be included in the shoe
+     * @constructor
+     */
     constructor(decks) {
         super();
 
@@ -28,6 +48,9 @@ class Shoe extends EventEmitter {
         this.cards = [];
     }
 
+    /**
+     * Creates the cards array
+     */
     createDecks() {
         for (let i = 0; i < this.decks; i++) {
             for (let j = 0; j < 52; j++) {
@@ -36,10 +59,17 @@ class Shoe extends EventEmitter {
         }
     }
 
+    /**
+     * Shuffles the cards array
+     */
     shuffle() {
-        Shuffle(this.cards);
+        shuffleArray(this.cards);
     }
 
+    /**
+     * Draws the next card
+     * @return {Card} Card drawn
+     */
     draw() {
         if (this.cards.length == 0) {
             this.createDecks();
@@ -49,16 +79,25 @@ class Shoe extends EventEmitter {
         return this.cards.pop();
     }
 
+    /**
+     * To string
+     * @return {string} String representation of the shoe
+     */
     toString() {
-        return `[${this.cards.map(c => c.toString()).join(', ')}]`;
+        return `[${this.cards.map((c) => c.toString()).join(', ')}]`;
     }
 
+    /**
+     * Creates a card from the value passed in
+     * @param {number} value - The integer value to be converted
+     * @return {Card} Card created
+     */
     createCard(value) {
-        var suit = Math.floor(value / 13);
-        var value = value % 13;
+        const suit = Math.floor(value / 13);
+        const cardValue = value % 13;
 
-        var suitString = Card.DefaultSuits[suit];
-        var valueString = Card.DefaultValues[value];
+        let suitString = Card.DefaultSuits[suit];
+        let valueString = Card.DefaultValues[cardValue];
 
         return new Card(suitString, valueString);
     }
