@@ -13,7 +13,7 @@ let burnCard = gameEngine.burnCards();
 console.log('burnCard = ', JSON.stringify(burnCard));
 
 const gameResults = [];
-for (let i = 0; i < 100; i += 1) {
+for (let i = 0; i < 20; i += 1) {
   if (gameEngine.isBurnNeeded) {
     gameEngine.shoe.shuffle();
     // Burn card is the first card drawn that determined the burn cards to use.
@@ -39,6 +39,12 @@ for (let i = 0; i < 100; i += 1) {
 
   const bigEye = roadmapGenerator.bigEyeRoad(bigRoad);
   console.log('bigEye = ', JSON.stringify(bigEye));
+
+  const smallRoad = roadmapGenerator.smallRoad(bigRoad);
+  console.log('smallRoad = ', JSON.stringify(smallRoad));
+
+  const cockroachPig = roadmapGenerator.cockroachPig(bigRoad);
+  console.log('cockroachPig = ', JSON.stringify(cockroachPig));
 }
 
 console.log('gameResults = ', JSON.stringify(gameResults));

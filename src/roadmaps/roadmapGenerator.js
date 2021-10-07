@@ -173,9 +173,8 @@ class RoadmapGenerator {
      * Derived road using the given cycle
      * @private
      * @param {BigRoad} bigRoad The big road data
-     * @param {int} cycleLength The big road data
-     * @return {BigEyeRoad} A new list of big road items whose view is scrolled
-     * to have the amount of drawing columns visible.
+     * @param {int} cycleLength Cycle used to calculate the derived road
+     * @return {DerivedRoad} A new list of derived road items (i.e., list of red/blue)
      */
     derivedRoad(bigRoad, cycleLength) {
         let columnDefinitions = this.bigRoadColumnDefinitions(bigRoad);
@@ -248,26 +247,44 @@ class RoadmapGenerator {
     }
 
     /**
-     * Scrolls the big eye road - derived road with a cycle of 1
+     * Generates the big eye road - derived road with a cycle of 1
      * @public
      * @param {BigRoad} bigRoad The big road data
-     * @return {BigEyeRoad} A new list of big road items whose view is scrolled
-     * to have the amount of drawing columns visible.
+     * @return {BigEyeRoad} A new list of derived road items
      */
     bigEyeRoad(bigRoad) {
         return this.derivedRoad(bigRoad, 1);
     }
 
     /**
+     * Generates the small road - derived road with a cycle of 2
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {SmallRoad} A new list of derived road items
+     */
+    smallRoad(bigRoad) {
+        return this.derivedRoad(bigRoad, 2);
+    }
+    /**
+     * Generates the cockroach pig - derived road with a cycle of 3
+     * @public
+     * @param {BigRoad} bigRoad The big road data
+     * @return {CockroachPigRoad} A new list of derived road items
+     */
+    cockroachPig(bigRoad) {
+        return this.derivedRoad(bigRoad, 3);
+    }
+
+    /**
      * Scrolls the big road drawing to only show the specified amount of
      * drawing columns.
      * @private
-     * @param {Object[]} results The big road data
+     * @param {GameResult[]} results The big road data
      * @param {number} highestDrawingColumn The highest column reached in
      * the big road supplied.
      * @param {number} drawingColumns The amount of columns to show in the
      * big road
-     * @return {Object[]} A new list of big road items whose view is scrolled
+     * @return {BigRoad} A new list of big road items whose view is scrolled
      * to have the amount of drawing columns visible.
      */
     scrollBigRoad(results = [], highestDrawingColumn, drawingColumns) {

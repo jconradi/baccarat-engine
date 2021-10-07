@@ -44,13 +44,28 @@ declare class RoadmapGenerator {
   private derivedRoad(bigRoad: BigRoad, cycleLength: number): BigEyeRoad;
 
   /**
-   * Scrolls the big eye road - derived road with a cycle of 1
+   * Generates the big eye road - derived road with a cycle of 1
    * @public
    * @param {BigRoad} bigRoad The big road data
-   * @return {BigEyeRoad} A new list of big road items whose view is scrolled
-   * to have the amount of drawing columns visible.
+   * @return {BigEyeRoad} A new list of derived road items
    */
   public bigEyeRoad(bigRoad: BigRoad): BigEyeRoad;
+
+  /**
+   * Generates the small road - derived road with a cycle of 2
+   * @public
+   * @param {BigRoad} bigRoad The big road data
+   * @return {SmallRoad} A new list of derived road items
+   */
+  public bigEyeRoad(bigRoad: BigRoad): SmallRoad;
+
+  /**
+   * Generates the cockroach pig road - derived road with a cycle of 3
+   * @public
+   * @param {BigRoad} bigRoad The big road data
+   * @return {CockroachPigRoad} A new list of derived road items
+   */
+  public bigEyeRoad(bigRoad: BigRoad): CockroachPigRoad;
 
   /**
    * Scrolls the big road drawing to only show the specified amount of
@@ -95,6 +110,8 @@ import {
   BigRoad,
   BigRoadConfig,
   BigEyeRoad,
+  SmallRoad,
+  CockroachPigRoad,
   ColumnDictionary,
   BeadPlateConfig,
   BeadPlate,
