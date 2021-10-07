@@ -23,6 +23,7 @@ interface BigEyeRoad {}
  * Generator for common baccarat roadmaps.
  */
 declare class RoadmapGenerator {
+  constructor();
   /**
    * Calculates a bead plate based on games played.
    * @param {GameResult[]} gameResults The game results to
