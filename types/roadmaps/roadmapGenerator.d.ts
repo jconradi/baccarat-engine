@@ -1,23 +1,4 @@
-export { RoadmapGenerator, BeadPlateConfig, BeadPlate };
-
-interface BeadPlateConfig {
-  columns: number;
-  rows: number;
-}
-
-interface BeadPlate {}
-
-interface BigRoadConfig {
-  columns: number;
-  rows: number;
-  scroll: boolean;
-}
-
-interface ColumnDictionary {}
-
-interface BigRoad {}
-
-interface BigEyeRoad {}
+export = RoadmapGenerator;
 
 /**
  * Generator for common baccarat roadmaps.
@@ -110,3 +91,11 @@ declare class RoadmapGenerator {
   private rowForGameNumber(gameNumber: number, columnSize: number): number;
 }
 import GameResult = require("../gameResult");
+import {
+  BigRoad,
+  BigRoadConfig,
+  BigEyeRoad,
+  ColumnDictionary,
+  BeadPlateConfig,
+  BeadPlate,
+} from "./interfaces";
