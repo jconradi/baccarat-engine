@@ -12,6 +12,8 @@ import {
   ColumnDictionary,
   BeadPlateConfig,
   BeadPlate,
+  CockroachPigRoad,
+  SmallRoad,
 } from "./roadmaps/interfaces";
 
 export {
@@ -27,4 +29,6 @@ export {
   ColumnDictionary,
   BeadPlateConfig,
   BeadPlate,
+  CockroachPigRoad,
+  SmallRoad,
 };
