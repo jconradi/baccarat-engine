@@ -13,7 +13,7 @@ declare class RoadmapGenerator {
    * @return {BeadPlate} A data representation of how a bead plate can
    *  be drawn from this calculation.
    */
-  beadPlate(gameResults: GameResult[], config: BeadPlateConfig): BeadPlate;
+  beadPlate(gameResults: GameResult[], config?: BeadPlateConfig): BeadPlate;
 
   /**
    * Calculates a big road based on games played.
@@ -23,7 +23,7 @@ declare class RoadmapGenerator {
    * @return {BigRoad} A data representation of how a big road can
    *  be drawn from this calculation.
    */
-  bigRoad(gameResults: GameResult[], config: BigRoadConfig): BigRoad;
+  bigRoad(gameResults: GameResult[], config?: BigRoadConfig): BigRoad;
 
   /**
    * Big road column definitions
