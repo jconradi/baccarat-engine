@@ -5,7 +5,7 @@ export = GameResult;
  * @property {GameResultPair} pair The status of the pair bet on this game
  */
 declare class GameResult {
-  outcome: GameResultOutcomes;
+  outcome: GameResult.Tie | GameResult.Banker | GameResult.Player;
   natural: GameResultNatural;
   pair: GameResultPair;
 }
