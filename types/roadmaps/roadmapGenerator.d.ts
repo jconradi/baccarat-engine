@@ -57,7 +57,7 @@ declare class RoadmapGenerator {
    * @param {BigRoad} bigRoad The big road data
    * @return {SmallRoad} A new list of derived road items
    */
-  public bigEyeRoad(bigRoad: BigRoad): SmallRoad;
+  public smallRoad(bigRoad: BigRoad): SmallRoad;
 
   /**
    * Generates the cockroach pig road - derived road with a cycle of 3
@@ -65,7 +65,7 @@ declare class RoadmapGenerator {
    * @param {BigRoad} bigRoad The big road data
    * @return {CockroachPigRoad} A new list of derived road items
    */
-  public bigEyeRoad(bigRoad: BigRoad): CockroachPigRoad;
+  public cockroachPig(bigRoad: BigRoad): CockroachPigRoad;
 
   /**
    * Scrolls the big road drawing to only show the specified amount of
