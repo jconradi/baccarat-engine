@@ -16,6 +16,12 @@ import {
   SmallRoad,
 } from "./roadmaps/interfaces";
 
+import {
+  GameResultOutcomes,
+  GameResultNatural,
+  GameResultPair,
+} from "./gameResultEnums";
+
 export {
   BaccaratResultsEngine,
   BaccaratGameEngine,
@@ -31,4 +37,7 @@ export {
   BeadPlate,
   CockroachPigRoad,
   SmallRoad,
+  GameResultNatural,
+  GameResultOutcomes,
+  GameResultPair,
 };
