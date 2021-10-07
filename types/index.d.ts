@@ -5,6 +5,15 @@ import GameResult = require("./gameResult.js");
 import Hand = require("./hand.js");
 import RoadmapGenerator = require("./roadmaps/roadmapGenerator.js");
 
+import {
+  BigRoad,
+  BigRoadConfig,
+  BigEyeRoad,
+  ColumnDictionary,
+  BeadPlateConfig,
+  BeadPlate,
+} from "./roadmaps/interfaces";
+
 export {
   BaccaratResultsEngine,
   BaccaratGameEngine,
@@ -12,4 +21,10 @@ export {
   GameResult,
   Hand,
   RoadmapGenerator,
+  BigRoad,
+  BigRoadConfig,
+  BigEyeRoad,
+  ColumnDictionary,
+  BeadPlateConfig,
+  BeadPlate,
 };
