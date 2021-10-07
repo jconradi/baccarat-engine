@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.1.4 2021-10-7]
+### Added
+- Added typescript typings for library
+- Add sample usage
+### Changed
+- Fixed bugs in Big eye road and other derived roads
+
 ## [1.1.3 2020-07-04]
 ### Added
 ### Changed
