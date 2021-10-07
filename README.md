@@ -6,13 +6,13 @@ The baccarat engine project is meant as a library in order to ease the calculati
 
 Installation from source to your development machine is quite easy and should only consist of a call to:
 
-```
+```bash
 * npm install
 ```
 
 ## An explanation of punto banco baccarat
 
-_Credit to [Wikipedia](<https://en.wikipedia.org/wiki/Baccarat_(card_game)#Punto_banco>)._
+_Credit to [Wikipedia](<https://en.wikipedia.org/wiki/Baccarat_(card*game)#Punto_banco>).*
 
 In baccarat, cards have a point value: cards two through nine are worth face value (in points); tens, jacks, queens and kings have no point value (i.e. are worth zero); aces are worth 1 point; jokers are not used. Hands are valued according to the rightmost digit of the sum of their constituent cards. For example, a hand consisting of 2 and 3 is worth 5, but a hand consisting of 6 and 7 is worth 3 (i.e., the 3 being the rightmost digit in the combined points total of 13). The highest possible hand value in baccarat is therefore nine.
 
