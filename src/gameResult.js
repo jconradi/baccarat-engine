@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * @property {String} outcome The outcome of the game
- * @property {String} natural The status of a natural bet on this game
- * @property {String} pair The status of the pair bet on this game
+ * @property {string} outcome The outcome of the game
+ * @property {string} natural The status of a natural bet on this game
+ * @property {string} pair The status of the pair bet on this game
  */
 class GameResult {
 }
