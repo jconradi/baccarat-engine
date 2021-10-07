@@ -1,10 +1,10 @@
-export enum GameResultOutcomes {
+export const enum GameResultOutcomes {
   Player = "player",
   Banker = "banker",
   Tie = "tie",
 }
 
-export enum GameResultNatural {
+export const enum GameResultNatural {
   PlayerNatural8 = "player8",
   PlayerNatural9 = "player9",
   BankerNatural8 = "banker8",
@@ -12,7 +12,7 @@ export enum GameResultNatural {
   NoNatural = "none",
 }
 
-export enum GameResultPair {
+export const enum GameResultPair {
   PlayerPair = "player",
   BankerPair = "banker",
   BothPair = "both",
