@@ -71,6 +71,9 @@ class RoadmapGenerator {
                         if (lastItemInResults) {
                             lastItemInResults.ties = _.cloneDeep(tieStack);
                             tieStack = [];
+                            if (lastItemInResults.result.outcome !== gameResult.outcome) {
+                                logicalColumnNumber++;
+                            }
                         }
                     } else if (lastItem.outcome !== gameResult.outcome) {
                         // If this item is different from the outcome of
