@@ -77,9 +77,13 @@ class RoadmapGenerator {
                         }
                     } else if (lastItem.outcome !== gameResult.outcome) {
                         // If this item is different from the outcome of
-                        // the last game then we must place it in another
-                        // column
+                        // the last game then we must place it in another column
+                        // lastItem is not tie so we can clear the tieStack
                         logicalColumnNumber++;
+                        tieStack = [];
+                    } else {
+                        // If this item is the same as the outcome of current game and not a tie, then we must clear the tie stack
+                        tieStack = []
                     }
                 }
 
