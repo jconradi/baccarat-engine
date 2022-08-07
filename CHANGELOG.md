@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+# [1.1.5 2022-08-07]
+### Added
+### Changed
+- Fix bugs in tie stack calculation and rather or not to move on to another column
+
 # [1.1.4 2021-10-7]
 ### Added
 - Added typescript typings for library
